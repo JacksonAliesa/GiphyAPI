@@ -6,9 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
     <title>Giphy API</title>
+    <style>
+    body {
+      font-family: 'Inconsolata', monospace;
+    }
+  </style>
 </head>
-<body>
+<body class = "p-3 mb-2 bg-light">
+<div class="container">
+    <div class="jumbotron jumbotron-fluid p-3 mb-2 bg-success text-center font-weight-bold">
+        <div class="container">
+          <h1 class="display-4">Gifs<i class="far fa-grin-tongue-wink"></i> Anonymous</h1>
+        </div>
+      </div>
     
     <!-- Artist Giph buttons will get dumped here -->
     <div id="buttonDisplay" class="btn btn-primary"></div>
@@ -16,7 +28,7 @@
     <br>
     <br>
    <!--User can submit search options-->
-    <form id="userSearch" class="btn btn-secondary">
+    <form id="userSearch" class="btn btn-success">
       <label for="userSubmit"></label>
       <input type="text" id="userSubmit">
       <br>
@@ -33,6 +45,10 @@
   <!--Javascript link-->
   <script type="text/javascript" src="assets/javascript.js">
   </script>
-    
+  
+  
+</div> 
+  
+
 </body>
 </html>

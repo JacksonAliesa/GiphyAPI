@@ -40,7 +40,7 @@ function giph(response) {
 	// var ratingDiv = response.rating;
 	//made another variable to display the rating in a P tag on page
 	var results = response.data;
-	for (var i = 0; i < results[i].length; i++) {
+	for (var i = 0; i < results.length; i++) {
 		// Creating a div for the gif Ptag and image tage to be held in
 		var gifDiv = $('<div>');
 		//created a ptag to hold the image tags for gif
@@ -54,7 +54,8 @@ function giph(response) {
 		var imgTag = $('<img>');
 		// Giving the image tag an src attribute of a property pulled off the
 		// added added additional atrributes to the image to later pull for them to capture the pause/animate setting
-		imgTag.attr('src', results[i].images.fixed_height.url);
+		imgTag.attr('src', results[i].images.fixed_height_still.url);
+		imgTag.addClass("gif")
 		imgTag.attr("data-state", "still")
 		imgTag.attr("data-still", results[i].images.fixed_height_still.url)
 		imgTag.attr("data-animate", results[i].images.fixed_height.url)
@@ -65,7 +66,7 @@ function giph(response) {
 		gifDiv.append(imgTag);
 
 		// Prepending the gifDiv to the "#giphDisplay" div in the HTML
-		$('#gifDisplay').append(gifDiv);
+		$('#gifDisplay').prepend(gifDiv);
 	}
 }
 //need this onclick function since it is dynamic
@@ -73,7 +74,7 @@ function giph(response) {
 //  Because we are creating click events on "dynamic" content, we can't just use the usual "on" "click" syntax.)
 $(document).on('click', '.artistClass', function() {
 	//ajax function to capture the data
-
+	console.log("Button clicked")
 	// constructing a queryURL variable we will use instead of the literal string inside of the ajax method
 	var title = $(this).text();
 	// query url broken down with a variable that specifies what to search for when the ajax function is ran
@@ -85,6 +86,7 @@ $(document).on('click', '.artistClass', function() {
 		url: queryURL,
 		method: 'GET'
 	}).then(function(response) {
+		console.log("AJAX response")
 		console.log(response);
 		giph(response);
 		btnFunction();
@@ -115,6 +117,22 @@ $("#add-artist").on("click", function (event) {
 // ​$(document).on('click', '.artistClass', giph);{
 
 // }
+
+$(document).on("click", ".gif", function() {
+	var state = $(this).attr("data-state");
+	// If the clicked image's state is still, update its src attribute to what its data-animate value is.
+	// Then, set the image's data-state to animate
+	// Else set src to the data-still value
+	if (state === "still") {
+	  $(this).attr("src", $(this).attr("data-animate"));
+	  $(this).attr("data-state", "animate");
+	} else {
+	  $(this).attr("src", $(this).attr("data-still"));
+	  $(this).attr("data-state", "still");
+	}
+
+
+});
 
 
 
