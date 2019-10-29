@@ -11,19 +11,21 @@
 <body>
     
     <!-- Artist Giph buttons will get dumped here -->
-    <div id="buttonDisplay"></div>
+    <div id="buttonDisplay" class="btn btn-primary"></div>
+   
     <br>
     <br>
    <!--User can submit search options-->
-    <form id="userSearch">
-      <label for="userSubmit">Search New Artist</label>
+    <form id="userSearch" class="btn btn-secondary">
+      <label for="userSubmit"></label>
       <input type="text" id="userSubmit">
       <br>
-      <input id="add-artist" type="submit" value="Search">
+      <!--button triggers new artist to search-->
+      <button input id="add-artist" type="button" value="Search Artist" class="btn btn-outline-primary">Search</button>
     </form>
 
     <!--giphs will appear here-->
-    <div id="giphDisplay"></div>
+    <div id="gifDisplay"></div>
 
 
     <!-- Jquery Link -->

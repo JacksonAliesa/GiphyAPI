@@ -14,52 +14,107 @@ var topics = [
 	'Nipsey Hussle',
 	'Jeezy',
 	'Meek Mill',
-  'Rihanna',
-  "Cardi B"
+	'Rihanna',
+	'Cardi B',
 ];
 
+// Created a function that creates the buttons for my topic array
+function btnFunction(response) {
+	$('#buttonDisplay').empty();
+	for (var i = 0; i < topics.length; i++) {
+		//to create the beginning and end tag for the buttons on HTML
+		var artistBtn = $('<button>');
+		//add class to click button it knows to run ajax
+		artistBtn.addClass('artistClass');
+		//add attribute for datastate -- for animation
+		// var state = $(this).attr("data-state");
+		// to display the text on each button
+		artistBtn.text(topics[i]);
+		// Adds the buttons to the buttonDisplay div tag on HTML page
+		$('#buttonDisplay').append(artistBtn);
+	}
+}
+
+function giph(response) {
+	//made variable for the array of artists rating
+	// var ratingDiv = response.rating;
+	//made another variable to display the rating in a P tag on page
+	var results = response.data;
+	for (var i = 0; i < results[i].length; i++) {
+		// Creating a div for the gif Ptag and image tage to be held in
+		var gifDiv = $('<div>');
+		//created a ptag to hold the image tags for gif
+		var ratingPtag = $('<p>');
+		var rating = results[i].rating;
+		ratingPtag.text('Rating: ' + rating);
+		console.log(rating);
+
+		
+		// Creating an image tag
+		var imgTag = $('<img>');
+		// Giving the image tag an src attribute of a property pulled off the
+		// added added additional atrributes to the image to later pull for them to capture the pause/animate setting
+		imgTag.attr('src', results[i].images.fixed_height.url);
+		imgTag.attr("data-state", "still")
+		imgTag.attr("data-still", results[i].images.fixed_height_still.url)
+		imgTag.attr("data-animate", results[i].images.fixed_height.url)
+
+
+		// Appending the paragraph and imgTag we created to the "gifDiv" div we created
+		gifDiv.append(ratingPtag);
+		gifDiv.append(imgTag);
+
+		// Prepending the gifDiv to the "#giphDisplay" div in the HTML
+		$('#gifDisplay').append(gifDiv);
+	}
+}
+//need this onclick function since it is dynamic
+//  (NOTE: Pay attention to the unusual syntax here for the click event.
+//  Because we are creating click events on "dynamic" content, we can't just use the usual "on" "click" syntax.)
+$(document).on('click', '.artistClass', function() {
+	//ajax function to capture the data
 
 	// constructing a queryURL variable we will use instead of the literal string inside of the ajax method
-	var title = 'artists';
+	var title = $(this).text();
 	// query url broken down with a variable that specifies what to search for when the ajax function is ran
 	//added limit of 10 parameter to the end of the API key
 	var queryURL =
 		'https://api.giphy.com/v1/gifs/search?q=' + title + '&api_key=YSUfzDPFf4tYp4lEWxOOBMrChSYXE1p2&limit=10';
 
-	//ajax function to capture the data
 	$.ajax({
 		url: queryURL,
 		method: 'GET'
 	}).then(function(response) {
 		console.log(response);
-		//function for the buttons to display
+		giph(response);
+		btnFunction();
+		
+	});
+});
+btnFunction();
+
+
+
+//This create a new button and pushes it into your topics array every time user types in the input field and clicks the "add button"//
+
+
+//you would need an ID of your add button and your input field
+$("#add-artist").on("click", function (event) {
+
+    event.preventDefault();
+  
+    var gif = $("#userSubmit").val().trim();
+  
+    topics.push(gif);
+  console.log(topics)
     btnFunction();
- 
+  });
+/////////////////////////////////////////////
 
-	//button display function
-	function btnFunction() {
-		for (var i = 0; i < topics.length; i++) {
-			//made variable for the array of artists rating
-			var ratingDiv = topics[i].rating;
-			//made another variable to display the rating in a P tag on page
-			var rating = $('<p>').text('Rating: ' + ratingDiv);
-			//to create the beginning and end tag for the buttons on HTML
-			var artistBtn = $('<button>');
-			// to display the text on each button
-			artistBtn.text(topics[i]);
-		// Adds the buttons to the buttonDisplay div tag on HTML page
-      $('#buttonDisplay').append(artistBtn);
-      // $("#buttonDisplay").on("click", function(){
-      // need to understand placement of the on-click function 
-      //why are my buttons disappearing?
+// btnFunction();
+// ​$(document).on('click', '.artistClass', giph);{
 
-      // });
-		}
-  }
-})
-// });
+// }
 
-//need to the onlick event listener for each button
-//set a p tag within the div tag w/ id of giph tag to display giphs once that specific artist's button is clicked on
-//set the rating to be displayed for each pic
-//make the pic animated when clicked on and paused after
+
+
