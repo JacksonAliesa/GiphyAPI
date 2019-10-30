@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6e7db8f0fe.js" crossorigin="anonymous"></script>
+    <link href="assets/css/styles.css" rel="stylesheet" type="text/css" />
     <title>Giphy API</title>
     <style>
     body {
@@ -18,7 +20,7 @@
 <div class="container">
     <div class="jumbotron jumbotron-fluid p-3 mb-2 bg-success text-center font-weight-bold">
         <div class="container">
-          <h1 class="display-4">Gifs<i class="far fa-grin-tongue-wink"></i> Anonymous</h1>
+          <h1 class="display-4">Gifs <i class="fab fa-angellist"></i> Anonymous</h1>
         </div>
       </div>
     
@@ -28,13 +30,15 @@
     <br>
     <br>
    <!--User can submit search options-->
+   <div class = "user">
     <form id="userSearch" class="btn btn-success">
       <label for="userSubmit"></label>
       <input type="text" id="userSubmit">
       <br>
       <!--button triggers new artist to search-->
-      <button input id="add-artist" type="button" value="Search Artist" class="btn btn-outline-primary">Search</button>
+      <button input id="add-artist" type="button" value="Search Artist" class="btn btn-outline-primary btn-sm">Search</button>
     </form>
+  </div>
 
     <!--giphs will appear here-->
     <div id="gifDisplay"></div>

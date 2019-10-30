@@ -2,7 +2,6 @@
 var topics = [
 	'Beyonce',
 	'Jhene Aiko',
-	'Snoh Aalegra',
 	'Notorious B.I.G.',
 	'Jay-Z',
 	'The Weeknd',

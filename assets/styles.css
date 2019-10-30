@@ -1,0 +1,10 @@
+#gifDisplay {
+    display: flex
+}
+
+#user {
+    justify-content: center;
+    flex-flow: column;
+    display: flex;
+   
+}
