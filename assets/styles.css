@@ -1,10 +1,9 @@
 #gifDisplay {
-    display: flex
+    display: inline-block;
 }
 
 #user {
-    justify-content: center;
-    flex-flow: column;
-    display: flex;
+   
+    display: inline-flex;
    
 }
